@@ -1,0 +1,17 @@
+/vendor/
+/.phpunit.cache/
+/.phpunit.result.cache
+/.phpcs.cache
+/composer.lock
+/.idea/
+*.swp
+.DS_Store
+
+# Local agent instructions and operator configuration are never public.
+/AGENTS.md
+/Agents.md
+/agents.md
+/config/local.php
+/config/*.local.php
+/docs/benutzerhandbuch.md
+/docs/audits/
