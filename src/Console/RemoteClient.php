@@ -47,13 +47,21 @@ final class RemoteClient
             'X-Komments-Timestamp' => (string) $timestamp,
             'X-Komments-Nonce' => $nonce,
             'X-Komments-Body-Hash' => $this->signer->bodyHash($body),
-            'X-Komments-Signature' => $this->signer->sign($source->secret, $method, $path, $timestamp, $nonce, $body),
+            'X-Komments-Signature' => $this->signer->sign(
+                $source->secret,
+                $method,
+                $path,
+                $timestamp,
+                $nonce,
+                $body,
+            ),
         ];
         if ($body !== '') {
             $headers['Content-Type'] = 'application/json';
         }
         if ($source->basicAuthUser !== null) {
-            $headers['Authorization'] = 'Basic ' . base64_encode($source->basicAuthUser . ':' . $source->basicAuthPassword);
+            $credentials = $source->basicAuthUser . ':' . $source->basicAuthPassword;
+            $headers['Authorization'] = 'Basic ' . base64_encode($credentials);
         }
         try {
             $response = $this->transport->send($method, $source->baseUrl . $path, $body, $headers);

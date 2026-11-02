@@ -44,7 +44,9 @@ final readonly class ModerationEntry
             $pageUrl,
             $value['createdAt'],
             $value['updatedAt'],
-            isset($value['verification_status']) && is_string($value['verification_status']) ? $value['verification_status'] : 'PENDING',
+            isset($value['verification_status']) && is_string($value['verification_status'])
+                ? $value['verification_status']
+                : 'PENDING',
         );
     }
 
