@@ -31,14 +31,19 @@ final class RemoteClientTest extends TestCase
                 return new HttpResponse(200, '{"data":[]}');
             }
         };
-        $clock = new class implements Clock { public function now(): int { return 1_700_000_000; } };
+        $clock = new class implements Clock {
+            public function now(): int
+            {
+                return 1_700_000_000;
+            }
+        };
         $source = RemoteSource::fromConfiguration('staging', [
             'label' => 'Staging', 'baseUrl' => 'https://remote.invalid', 'keyId' => 'key-a', 'secret' => 'test-secret',
         ]);
 
         self::assertSame(['data' => []], (new RemoteClient($transport, $clock))->pending($source));
         self::assertSame('GET', $transport->method);
-        self::assertSame('https://remote.invalid/api/komments-remote-moderation/v1/pending', $transport->url);
+        self::assertSame('https://remote.invalid/komments-remote-moderation/v1/pending', $transport->url);
         self::assertSame('', $transport->body);
         self::assertSame('key-a', $transport->headers['X-Komments-Key-Id']);
         self::assertArrayNotHasKey('test-secret', $transport->headers);

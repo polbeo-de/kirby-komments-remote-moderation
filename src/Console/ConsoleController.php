@@ -9,8 +9,11 @@ use Kirby\Cms\App;
 final class ConsoleController
 {
     /** @param array<string, mixed> $configuration */
-    public function __construct(private readonly App $kirby, private readonly array $configuration, private readonly RemoteClient $client = new RemoteClient())
-    {
+    public function __construct(
+        private readonly App $kirby,
+        private readonly array $configuration,
+        private readonly RemoteClient $client = new RemoteClient(),
+    ) {
     }
 
     /** @return list<array{id: string, label: string, live: bool}> */
@@ -61,7 +64,12 @@ final class ConsoleController
         if (!in_array($payload['action'], ['publish', 'hold', 'spam', 'delete'], true)) {
             throw new \InvalidArgumentException('Unsupported moderation action');
         }
-        return $this->client->moderate($this->source($sourceId), $payload['id'], $payload['action'], $payload['updatedAt']);
+        return $this->client->moderate(
+            $this->source($sourceId),
+            $payload['id'],
+            $payload['action'],
+            $payload['updatedAt'],
+        );
     }
 
     /** @return list<RemoteSource> */

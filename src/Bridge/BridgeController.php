@@ -67,7 +67,12 @@ final class BridgeController
                 $secrets[(string) $keyId] = $key['secret'];
             }
         }
-        $verification = new RequestVerifier($secrets, new KirbyNonceStore($this->kirby), new SystemClock(), new HmacSigner());
+        $verification = new RequestVerifier(
+            $secrets,
+            new KirbyNonceStore($this->kirby),
+            new SystemClock(),
+            new HmacSigner(),
+        );
         $result = $verification->verify($request->method(), $path, $body, $signature);
         if (!$result->valid) {
             return $this->response(['error' => ['code' => 'unauthorized']], 401);

@@ -37,7 +37,10 @@ final class KommentsModerationGateway implements ModerationGateway
                 'updatedAt' => $comment['updatedAt'] ?? $comment['updatedat'] ?? $comment['updated_at'] ?? null,
                 'authorName' => $comment['authorName'] ?? $comment['authorname'] ?? $comment['author_name'] ?? null,
                 'authorUrl' => $comment['authorUrl'] ?? $comment['authorurl'] ?? $comment['author_url'] ?? null,
-                'authorAvatar' => $comment['authorAvatar'] ?? $comment['authoravatar'] ?? $comment['author_avatar'] ?? null,
+                'authorAvatar' => $comment['authorAvatar']
+                    ?? $comment['authoravatar']
+                    ?? $comment['author_avatar']
+                    ?? null,
             ];
             $pageUuid = $comment['pageUuid'] ?? $comment['pageuuid'] ?? null;
             if (!is_string($pageUuid) || $pageUuid === '') {

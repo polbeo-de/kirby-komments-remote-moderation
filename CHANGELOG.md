@@ -4,6 +4,11 @@ All notable changes to this project are documented in this file.
 
 ## Unreleased
 
+### Fixed
+
+- Allowed empty content for social reactions such as likes and reposts, so a
+  valid reaction can no longer make the remote moderation listing unavailable.
+
 ### Added
 
 - Local repository and open-source baseline: Composer metadata, MIT license,
