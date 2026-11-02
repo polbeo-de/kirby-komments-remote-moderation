@@ -27,6 +27,9 @@
     "test": "phpunit"
   },
   "config": {
+    "allow-plugins": {
+      "getkirby/composer-installer": true
+    },
     "sort-packages": true
   }
 }

@@ -1,6 +1,7 @@
 # Kirby Komments Remote Moderation
 
-> Status: pre-release; no public distribution has been made.
+> Status: maintained plugin. Release artifacts and version tags are published
+> through the repository release process.
 
 A Kirby 5 plugin for securely moderating pending
 [Komments](https://github.com/mauricerenck/komments) comments and webmentions
@@ -93,7 +94,7 @@ implemented and tested before a release.
 
 ## Panel operation
 
-The Panel area is named **Remote-Kommentare**. It provides source selection,
+The Panel area is named **Remote Comments** (or its translated equivalent). It provides source selection,
 pending entries, and moderation actions through authenticated Panel API routes.
 When the `remote-komments` field is added to a page blueprint, the same
 controls appear in that page's Panel view and show pending and published

@@ -1,51 +1,50 @@
-# Architektur
+# Architecture
 
-`kirby-komments-remote-moderation` ist ein generisches Kirby-5-Plugin für die
-zentralisierte Moderation ausstehender Komments-Kommentare und Webmentions.
-Es hat zwei unabhängig aktivierbare Rollen:
+`kirby-komments-remote-moderation` is a generic Kirby 5 plugin for centralised
+moderation of pending Komments comments and webmentions. It has two
+independently enabled roles:
 
-- Die **Remote-Bridge** läuft auf einer entfernten Kirby-Instanz ohne Panel und
-  stellt eine minimalistische, HMAC-geschützte JSON-API bereit.
-- Die **Moderationskonsole** läuft auf einer lokalen Panel-Instanz. Sie ruft
-  Remote-Quellen ausschließlich serverseitig auf und stellt eine eigene Panel
-  Area „Remote-Kommentare“ bereit.
+- The **remote bridge** runs on a remote Kirby instance without a Panel and
+  provides a minimal HMAC-protected JSON API.
+- The **moderation console** runs on a local Panel instance. It accesses
+  remote sources exclusively server-side and provides a dedicated Remote
+  Comments Panel area.
 
-## Verantwortlichkeiten und Grenzen
+## Responsibilities and boundaries
 
-| Komponente | Verantwortung | Nicht verantwortlich für |
+| Component | Responsible for | Not responsible for |
 | --- | --- | --- |
-| Bridge-HTTP-Schicht | sichere Entgegennahme und JSON-Antworten | Fachliche Speicherung |
-| Sicherheitsmodul | HMAC, Zeitfenster und Nonce-Replay-Schutz | Panel-Berechtigungen und Rate Limit |
-| Komments-Adapter | Lesen und Moderieren über öffentliche Komments-Klassen | direkte SQLite-Zugriffe |
-| Konsolen-Anwendung | serverseitiger Transport und Quellenwahl | Übergabe von Secrets an Browser |
-| Panel-Area | deutsche Bedienung und Live-Bestätigung | Remote-Authentifizierung |
+| Bridge HTTP layer | secure request handling and JSON responses | domain storage |
+| Security module | HMAC, time window, and nonce replay protection | Panel authorisation and rate limiting |
+| Komments adapter | reading and moderation through public Komments classes | direct SQLite access |
+| Console application | server-side transport and source selection | exposing secrets to the browser |
+| Panel area | translated interface and live confirmation | remote authentication |
 
-Die Bridge verwendet `mauricerenck\\Komments\\KommentModeration` und dessen
-Storage-Schicht statt einer externen Datenbankmanipulation. Ihre DTOs filtern
-E-Mail, IP, Verifikationstoken und andere nicht benötigte Felder aus.
+The bridge uses `mauricerenck\\Komments\\KommentModeration` and its storage
+layer rather than manipulating a database externally. Its DTOs filter email
+addresses, IP addresses, verification tokens, and other unnecessary fields.
 
-## Verträge
+## Contracts
 
-Die Bridge veröffentlicht nur `/api/komments-remote-moderation/v1/*`.
-Authentifizierte Signatur-Header enthalten Key-ID, Unix-Zeit, Nonce, Body-Hash
-und HMAC-SHA-256 über Methode, Pfad, Zeit, Nonce und Body-Hash. Eine Aktion
-enthält einen Idempotenzschlüssel und die erwartete `updatedAt`-Version. Bei
-einer veralteten Version liefert die Bridge `409 Conflict`.
+The bridge exposes only `/api/komments-remote-moderation/v1/*`. Authenticated
+signature headers contain a key ID, Unix timestamp, nonce, body hash, and an
+HMAC-SHA-256 over method, path, timestamp, nonce, and body hash. An action
+contains an idempotency key and the expected `updatedAt` version. The bridge
+returns `409 Conflict` for a stale version.
 
-## Abhängigkeiten
+## Dependencies
 
-PHP >= 8.2, Kirby 5 und Komments >= 3.9 sind Laufzeitvoraussetzungen. Der
-Komments-Adapter bleibt die einzige technische Abhängigkeit vom Upstream;
-Domain- und Sicherheitsklassen hängen nicht von Panel oder HTTP-Transport ab.
+PHP >= 8.2, Kirby 5, and Komments >= 3.9 are runtime requirements. The
+Komments adapter remains the only technical dependency on upstream; domain and
+security classes do not depend on the Panel or HTTP transport.
 
-## Sicherheitsmodell
+## Security model
 
-Endpunkte sind standardmäßig deaktiviert. Host-seitige Geheimnisse liegen nur
-in ignorierter Konfiguration. Die Bridge erzwingt Schlüssel-Whitelisting,
-konstante Zeitvergleich, ein enges Zeitfenster und einmalige Nonces im
-Kirby-Cache. Cache-basiertes Rate Limiting und eine metadatenarme Audit-Log-Senke
-sind vor einer Veröffentlichung noch zu implementieren.
+Endpoints are disabled by default. Host-side secrets exist only in ignored
+configuration. The bridge enforces key allow-listing, constant-time comparison,
+a narrow time window, and single-use nonces in Kirby's cache. Cache-based rate
+limiting and a metadata-minimising audit-log sink remain release blockers.
 
-Weiterführend: [ADR 0001](../adr/0001-separate-panel-area.md),
-[Systemverantwortlichkeiten](system-responsibilities.md),
-[Domänenmodell](domain-model.md) und [Deployment](deployment.md).
+See [ADR 0001](../adr/0001-separate-panel-area.md),
+[system responsibilities](system-responsibilities.md),
+[domain model](domain-model.md), and [deployment](deployment.md).

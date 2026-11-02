@@ -32,6 +32,8 @@ All notable changes to this project are documented in this file.
 
 ### Changed
 
+- Translated all repository documentation to English while keeping the Panel
+  interface localised through Kirby translation catalogs.
 - The global Remote Comments area again lists only pending entries; the
   article-level field continues to show published entries as delivery status.
 - README updated as an accurate pre-release document: rate limiting and audit
