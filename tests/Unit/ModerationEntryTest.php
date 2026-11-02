@@ -20,4 +20,14 @@ final class ModerationEntryTest extends TestCase
         self::assertArrayNotHasKey('authorEmail', $entry->toArray());
         self::assertArrayNotHasKey('ip', $entry->toArray());
     }
+
+    public function testAllowsEmptyContentForSocialReactions(): void
+    {
+        $entry = ModerationEntry::fromKomments([
+            'id' => 'like-id', 'type' => 'like-of', 'content' => '',
+            'createdAt' => '2026-01-01T00:00:00Z', 'updatedAt' => '2026-01-01T00:00:00Z',
+        ], 'Page', 'https://example.invalid/page');
+
+        self::assertSame('', $entry->content);
+    }
 }

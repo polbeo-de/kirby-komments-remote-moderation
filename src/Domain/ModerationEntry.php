@@ -24,10 +24,13 @@ final readonly class ModerationEntry
     /** @param array<string, mixed> $value */
     public static function fromKomments(array $value, string $pageTitle, string $pageUrl): self
     {
-        foreach (['id', 'type', 'content', 'createdAt', 'updatedAt'] as $required) {
+        foreach (['id', 'type', 'createdAt', 'updatedAt'] as $required) {
             if (!isset($value[$required]) || !is_string($value[$required]) || $value[$required] === '') {
                 throw new \InvalidArgumentException(sprintf('Missing required Komments field: %s', $required));
             }
+        }
+        if (!isset($value['content']) || !is_string($value['content'])) {
+            throw new \InvalidArgumentException('Missing required Komments field: content');
         }
 
         return new self(
