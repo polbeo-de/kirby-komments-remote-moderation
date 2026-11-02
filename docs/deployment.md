@@ -1,16 +1,15 @@
 # Deployment
 
-Installieren Sie das Plugin per Composer auf jeder beteiligten Kirby-Instanz.
-Aktivieren Sie die Bridge nur auf moderierten Instanzen und die Konsole nur auf
-der lokalen Panel-Instanz. Hinterlegen Sie Schlüssel nur in einer ignorierten
-Host-Konfigurationsdatei; nutzen Sie in Versionskontrolle ausschließlich
-Platzhalter.
+Install the plugin with Composer on every participating Kirby instance. Enable
+the bridge only on moderated instances and the console only on the local Panel
+instance. Store keys exclusively in an ignored host configuration file; commit
+placeholders only.
 
-Vor einem Update: Sicherung und Wartungsfenster nach den lokalen Regeln planen,
-Composer-Abhängigkeiten prüfen, Konfiguration validieren und zunächst Staging
-testen. Nach dem Update Endpunkte, Zeitfenster und einen testweisen
-Moderationsablauf prüfen. Bei Problemen die vorige getestete Paketversion
-wiederherstellen; keine Kommentare direkt in der Komments-Datenbank ändern.
+Before an update, plan a backup and maintenance window according to local
+policy, check Composer dependencies, validate configuration, and test Staging
+first. After the update, verify endpoints, time windows, and a test moderation
+flow. If necessary, restore the previously tested package version; never alter
+comments directly in the Komments database.
 
 ## Integration test: Hinterhof and website.test
 
