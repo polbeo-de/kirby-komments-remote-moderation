@@ -1,11 +1,11 @@
-# Offene Entscheidungen
+# Open decisions
 
-| Entscheidung | Status | Erforderliche Evidenz |
+| Decision | Status | Required evidence |
 | --- | --- | --- |
-| Genaues Mapping von `hold` auf Komments 3.9 | offen | Upstream-API und Tests gegen Komments 3.9 |
-| Panel-Komponenten und Build-Strategie | umgesetzt, zu validieren | Browser-Integrationstest gegen Kirby 5; sichtbare Texte verwenden Kirbys Übersetzungskatalog |
-| Audit-Log-Senke | offen | Betriebsanforderungen ohne Inhalts- oder PII-Logging |
-| Upstream Provider-Hook | vorgeschlagen | Rückmeldung des Komments-Maintainers |
+| Exact mapping of `hold` to Komments 3.9 | open | Upstream API review and tests against Komments 3.9 |
+| Panel components and build strategy | implemented, pending validation | Browser integration test against Kirby 5; all visible strings use Kirby's translation catalog |
+| Audit-log sink | open | Operational requirements without content or PII logging |
+| Upstream provider hook | proposed | Feedback from the Komments maintainer |
 
-Diese Entscheidungen blockieren nur die betroffenen Implementierungsdetails,
-nicht die dokumentierte Sicherheits- und Transportarchitektur.
+These decisions block only the affected implementation details, not the
+documented security and transport architecture.

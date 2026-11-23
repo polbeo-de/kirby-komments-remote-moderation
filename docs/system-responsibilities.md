@@ -1,11 +1,10 @@
-# Systemverantwortlichkeiten
+# System responsibilities
 
-Die Remote-Bridge schützt und übersetzt einen kleinen Moderationsvertrag. Sie
-entscheidet nicht über redaktionelle Regeln; Komments bleibt Eigentümer von
-Kommentarstatus und Speicherung. Die lokale Konsole ist der einzige Ort für
-Panel-Interaktion und die zusätzliche Schreibbestätigung für eine Quelle mit
-der Kennzeichnung `live`.
+The remote bridge protects and translates a small moderation contract. It does
+not decide editorial policy; Komments remains the owner of comment state and
+storage. The local console is the only place for Panel interaction and the
+additional write confirmation required for a source marked `live`.
 
-Der Browser kommuniziert nur mit authentifizierten Kirby-Panel-Routen. Diese
-routen intern zum serverseitigen Remote-Client. HMAC-Schlüssel verlassen weder
-die lokale PHP-Laufzeit noch die Remote-Bridge-Konfiguration.
+The browser communicates only with authenticated Kirby Panel routes. Those
+routes delegate internally to the server-side remote client. HMAC keys never
+leave the local PHP runtime or remote bridge configuration.

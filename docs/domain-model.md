@@ -1,11 +1,11 @@
-# Domänenmodell
+# Domain model
 
-- **Quelle**: benannte lokale oder Remote-Moderationsinstanz mit Rolle,
-  Basis-URL und Schlüsselkennung.
-- **Moderationseintrag**: datensparsames Abbild eines Kommentars oder einer
-  Webmention mit ID, Typ, anonymisierter notwendiger Autorendarstellung,
-  Seitendaten, Status und `updatedAt`.
-- **Moderationsaktion**: `publish`, `hold`, `spam` oder `delete`, gebunden an
-  Eintrag, erwartete Version und Idempotenzschlüssel.
-- **Signierte Anfrage**: Methode, Pfad, Zeit, Nonce, Body-Hash und HMAC.
-- **Audit-Ereignis**: nicht sensitiver Nachweis über eine Aktion.
+- **Source**: a named local or remote moderation instance with a role, base
+  URL, and key identifier.
+- **Moderation entry**: a data-minimised representation of a comment or
+  webmention with its ID, type, necessary pseudonymised author presentation,
+  page data, status, and `updatedAt`.
+- **Moderation action**: `publish`, `hold`, `spam`, or `delete`, bound to an
+  entry, expected version, and idempotency key.
+- **Signed request**: method, path, timestamp, nonce, body hash, and HMAC.
+- **Audit event**: non-sensitive evidence of an action.
